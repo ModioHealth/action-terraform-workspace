@@ -1,0 +1,115 @@
+name: 'Terraform workspaces management action'
+description: 'This action manages building/deploying workspaces to terraform cloud.'
+author: 'MH'
+inputs:
+  baseDir:
+    description: 'Base directory for terraform (defaults to ".")'
+    default: '.'
+    required: true
+  deleteWorkspacesEnabled:
+    description: 'Delete workspace on branch removal'
+    default: 'true'
+    required: true
+  previewWorkspacesEnabled:
+    description: 'Deploy preview workspaces (in addition to dev/stage/prod)'
+    default: 'false'
+    required: true
+  previewWorkspacePrefix:
+    description: 'Prefix to use for preview workspaces'
+    default: 'preview'
+    required: true
+  pullRequestPlansEnabled:
+    description: 'Run terraform plans for pull requests'
+    default: 'true'
+    required: true
+  githubEnabled:
+    description: 'GitHub enabled (defaults to false)'
+    default: 'false'
+    required: true
+  githubToken:
+    description: 'GitHub token'
+    required: true
+  grafanaApiKey:
+    description: 'Grafana API Key'
+    required: false
+  grafanaBaseUrl:
+    description: 'Grafana Base URL'
+    required: false
+  grafanaEnabled:
+    description: 'Grafana Deployment Annotations Enabled (defaults to false)'
+    default: 'false'
+    required: true
+  jiraClientId:
+    description: 'JIRA Client ID'
+    required: false
+  jiraClientSecret:
+    description: 'JIRA Client Secret'
+    required: false
+  jiraEnabled:
+    description: 'JIRA Deployment Enabled (default to false)'
+    default: 'false'
+    required: true
+  jiraOrganization:
+    description: 'JIRA Organization ID'
+    required: false
+  jiraOrganizationProperty:
+    description: 'JIRA Organization Property (metadata added to deployments)'
+    required: false
+  #nonprodBranch:
+  #  description: 'Nonproduction git branch name'
+  #  default: 'develop'
+  #  required: true
+  #nonprodWorkspacePrefix:
+  #  description: 'Nonproduction workspace prefix name in terraform'
+  #  default: 'dev'
+  #  required: true
+  nonprodWorkspaceEnabled:
+    description: 'Enabled deployments to terraform nonprod workspace'
+    default: 'true'
+    required: true
+  #prodBranch:
+  #  description: 'master'
+  #  default: 'Production git branch name'
+  #  required: true
+  #prodWorkspacePrefix:
+  #  description: 'Production workspace prefix name in terraform'
+  #  default: 'prod'
+  #  required: true
+  prodWorkspaceEnabled:
+    description: 'Enabled deployments to terraform production workspace'
+    default: 'true'
+    required: true
+  #stageBranch:
+  #  description: 'Stage environment git branch name'
+  #  default: 'stage'
+  #  required: true
+  #stageWorkspacePrefix:
+  #  description: 'Staging workspace prefix name in terraform'
+  #  default: 'stage'
+  #  required: true
+  stageWorkspaceEnabled:
+    description: 'Enabled deployments to terraform stage workspace'
+    default: 'true'
+    required: true
+  terraformCloudApiKey:
+    description: 'Terraform Cloud API Key (organization)'
+    required: true
+  terraformCloudOrganization:
+    description: 'Terraform Cloud Organization to use'
+    required: true
+  workspacesDir:
+    description: 'Directory of workspaces configuration'
+    default: 'workspaces'
+    required: true
+  workspaceName:
+    description: 'Workspace name (defaults to repo name)'
+    required: false
+  workspacePrefix:
+    description: 'Workspace prefix (defaults to none)'
+    required: false
+outputs:
+  deploymentId:
+    description: 'GitHub deployment id'
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
